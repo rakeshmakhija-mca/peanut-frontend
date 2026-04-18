@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 export default function CropDetail() {
   const { slug } = useParams();
   const [data, setData] = useState(null);
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState("gu");
   const [open, setOpen] = useState(false);
   const [logoError, setLogoError] = useState(false);
 
