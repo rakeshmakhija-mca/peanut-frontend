@@ -41,7 +41,7 @@ export default function CropForm() {
     // 🔥 Load data for edit
     useEffect(() => {
         if (id) {
-            axios.get(`https://qr-app-backend.vercel.app//api/crops/${id}`).then((res) => {
+            axios.get(`https://qr-app-backend.vercel.app/api/crops/${id}`).then((res) => {
                 setForm(res.data.data);
             });
         }
@@ -50,9 +50,9 @@ export default function CropForm() {
     // ✅ Submit
     const handleSubmit = async () => {
         if (id) {
-            await axios.put(`https://qr-app-backend.vercel.app//api/crops/${id}`, form);
+            await axios.put(`https://qr-app-backend.vercel.app/api/crops/${id}`, form);
         } else {
-            await axios.post("https://qr-app-backend.vercel.app//api/crops", form);
+            await axios.post("https://qr-app-backend.vercel.app/api/crops", form);
         }
         navigate("/");
     };

@@ -32,7 +32,7 @@ export default function CropDetail() {
 
   useEffect(() => {
     axios
-      .get(`https://qr-app-backend.vercel.app//api/crops/slug/${slug}`)
+      .get(`https://qr-app-backend.vercel.app/api/crops/slug/${slug}`)
       .then((res) => setData(res.data.data));
   }, [slug]);
 

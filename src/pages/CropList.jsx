@@ -12,7 +12,7 @@ export default function CropList() {
         try {
             setLoading(true);
             const res = await axios.get(
-                "https://qr-app-backend.vercel.app//api/crops"
+                "https://qr-app-backend.vercel.app/api/crops"
             );
             setData(res.data.data);
         } catch (err) {
@@ -28,7 +28,7 @@ export default function CropList() {
 
     const deleteCrop = async (id) => {
         await axios.delete(
-            `https://qr-app-backend.vercel.app//api/crops/${id}`
+            `https://qr-app-backend.vercel.app/api/crops/${id}`
         );
         fetchCrops();
     };
@@ -158,7 +158,7 @@ export default function CropList() {
                                                     <div className="hidden">
                                                         <QRCodeCanvas
                                                             id={`qr-${item.slug}`}
-                                                            value={`https://arman-industries.netlify.app/crop/${item.slug}`}
+                                                            value={`https://arman-industries.vercel.app/crop/${item.slug}`}
                                                             size={200}
                                                         />
                                                     </div>
