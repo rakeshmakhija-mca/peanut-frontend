@@ -57,12 +57,12 @@ export default function CropDetail() {
   const labels = {
     jat: { en: "Quality", gu: "જાત" },
     days: { en: "Days to ripening", gu: "પાકવા ના દિવસો" },
-    weight: { en: "Weight of 100 grains", gu: "૧૦૦ દાના નું વજન" },
+    weight: { en: "Weight of 100 grains", gu: "૧૦૦ દાણા નું વજન" },
     bigSeed: { en: "Seed Type", gu: "બીજ પ્રકાર" },
     oilPercentage: { en: "Percentage of oil", gu: "તેલની ટકાવારી" },
     ground: { en: "Ground / Earth", gu: "જમીન" },
     plantingTime: { en: "Planting time", gu: "વાવેતર સમય" },
-    seedRate: { en: "Seed", gu: "બીજ દર" },
+    seedRate: { en: "Seed rate", gu: "બીજ દર" },
     distance: { en: "Planting distance", gu: "વાવેતર અંતર" },
     production: { en: "Average production", gu: "સરેરાશ ઉત્પાદન" },
     acidlevel: { en: "Acid Level", gu: "એસિડ સ્તર" },
@@ -325,10 +325,6 @@ export default function CropDetail() {
                     <h3 className="font-semibold text-lg">
                       {crop?.name?.[language] || "-"}
                     </h3>
-
-                    <p className="text-sm text-gray-500 mt-1 line-clamp-2">
-                      {crop?.features?.[language]}
-                    </p>
                   </div>
                 </motion.a>
               </SwiperSlide>

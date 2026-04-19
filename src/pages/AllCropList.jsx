@@ -242,10 +242,6 @@ export default function AllCropList() {
                                         <h3 className="font-semibold text-lg">
                                             {crop?.name?.[language] || "-"}
                                         </h3>
-
-                                        <p className="text-sm text-gray-500 mt-1 line-clamp-2">
-                                            {crop?.features?.[language]}
-                                        </p>
                                     </div>
                                 </motion.a>
                             </SwiperSlide>
