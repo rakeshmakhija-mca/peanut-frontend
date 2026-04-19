@@ -34,7 +34,8 @@ export default function CropList() {
     };
 
     const downloadQR = (slug) => {
-        const canvas = document.getElementById(`qr-${slug}`);
+        const id = slug === "all-crops" ? "qr-all" : `qr-${slug}`;
+        const canvas = document.getElementById(id);
         if (!canvas) return;
 
         const pngUrl = canvas
@@ -87,12 +88,29 @@ export default function CropList() {
                     {/* HEADER */}
                     <div className="flex justify-between mb-4">
                         <h2 className="text-xl font-bold">Crops</h2>
-                        <Link
-                            to="/admin/create"
-                            className="bg-blue-500 text-white px-4 py-2 rounded"
-                        >
-                            Add
-                        </Link>
+                        <div className="flex flex-column md:flex-row items-center justify-center gap-2">
+                            <div className="hidden">
+                                <QRCodeCanvas
+                                    id="qr-all"
+                                    value={`https://arman-industries.vercel.app/crops`}
+                                    size={200}
+                                />
+                            </div>
+
+                            {/* 🔥 DOWNLOAD BUTTON */}
+                            <button
+                                onClick={() => downloadQR("all-crops")}
+                                className="bg-orange-500 text-white px-3 py-1 rounded text-sm w-fit hover:bg-orange-600 flex items-center justify-center h-[100%]"
+                            >
+                                All Crops QR
+                            </button>
+                            <Link
+                                to="/admin/create"
+                                className="bg-blue-500 text-white px-4 py-2 rounded"
+                            >
+                                Add
+                            </Link>
+                        </div>
                     </div>
 
                     {/* TABLE */}

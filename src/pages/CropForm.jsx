@@ -54,7 +54,7 @@ export default function CropForm() {
         } else {
             await axios.post("https://qr-app-backend.vercel.app/api/crops", form);
         }
-        navigate("/");
+        navigate("/admin");
     };
 
     return (

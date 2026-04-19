@@ -2,6 +2,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/autoplay";
+import "swiper/css/navigation";
+
+import { Autoplay, Navigation } from "swiper/modules";
 
 export default function CropDetail() {
   const { slug } = useParams();
@@ -9,6 +15,7 @@ export default function CropDetail() {
   const [language, setLanguage] = useState("gu");
   const [open, setOpen] = useState(false);
   const [logoError, setLogoError] = useState(false);
+  const [otherCrops, setOtherCrops] = useState([]);
 
   function Row({ label, value }) {
     if (!value) return null;
@@ -31,9 +38,20 @@ export default function CropDetail() {
   }
 
   useEffect(() => {
+    // current crop
     axios
       .get(`https://qr-app-backend.vercel.app/api/crops/slug/${slug}`)
       .then((res) => setData(res.data.data));
+
+    // other crops
+    axios
+      .get("https://qr-app-backend.vercel.app/api/crops")
+      .then((res) => {
+        const filtered = res.data.data.filter(
+          (item) => item.slug !== slug
+        );
+        setOtherCrops(filtered);
+      });
   }, [slug]);
 
   const labels = {
@@ -263,6 +281,62 @@ export default function CropDetail() {
         </div>
       </div >
 
+      {/* 🔥 OTHER CROPS SLIDER */}
+      <div className="bg-[#ffffff] py-12">
+        <h2 className="text-center text-2xl md:text-3xl font-bold mb-8 text-[#7a2e2e]">
+          {language === "gu" ? "બીજા પાક" : "Other Crops"}
+        </h2>
+
+        <div className="px-6">
+          <Swiper
+            modules={[Autoplay, Navigation]}
+            spaceBetween={20}
+            slidesPerView={1.2}
+            breakpoints={{
+              640: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+              1280: { slidesPerView: 4 },
+            }}
+            autoplay={{
+              delay: 2000,
+              disableOnInteraction: false,
+            }}
+            loop={true}
+          // navigation={true}
+          >
+            {otherCrops.map((crop) => (
+              <SwiperSlide key={crop._id}>
+                <motion.a
+                  href={`/crop/${crop.slug}`}
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-white rounded-xl shadow-md hover:shadow-2xl transition overflow-hidden"
+                >
+                  {/* IMAGE */}
+                  <div className="overflow-hidden">
+                    <img
+                      src="/peanut.png"
+                      alt={crop?.name?.[language]}
+                      className="w-full h-[180px] object-cover"
+                    />
+                  </div>
+
+                  {/* CONTENT */}
+                  <div className="p-4">
+                    <h3 className="font-semibold text-lg">
+                      {crop?.name?.[language] || "-"}
+                    </h3>
+
+                    <p className="text-sm text-gray-500 mt-1 line-clamp-2">
+                      {crop?.features?.[language]}
+                    </p>
+                  </div>
+                </motion.a>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </div>
+
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -312,7 +386,7 @@ export default function CropDetail() {
             transition={{ duration: 1 }}
             viewport={{ once: true }}
 
-            whileHover={{ scale: 1.03 }}
+          // whileHover={{ scale: 1.03 }}
           />
 
         </div>
