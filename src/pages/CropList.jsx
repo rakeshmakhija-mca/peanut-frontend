@@ -261,7 +261,7 @@ export default function CropList() {
 
                 {/* COPYRIGHT */}
                 <div className="text-center text-xs text-gray-600 mt-10">
-                    © 2023 by Rakesh Makhija and Raj Patel Technologies
+                    © 2026 by Rakesh Makhija and Raj Patel Technologies - 8849884208
                 </div>
             </div>
         </div>
